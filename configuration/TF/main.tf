@@ -40,6 +40,10 @@ resource "vsphere_virtual_machine" "vm" {
   wait_for_guest_net_timeout = 0
   wait_for_guest_ip_timeout  = 0
 
+  ovf_deploy {
+    // Url to remote ovf/ova file
+    remote_ovf_url = "https://cloud-images.ubuntu.com/releases/focal/release/ubuntu-20.04-server-cloudimg-amd64.ova"
+  }
   network_interface {
     network_id = "${data.vsphere_network.network.id}"
   }
