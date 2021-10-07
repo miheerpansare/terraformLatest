@@ -1,3 +1,12 @@
+variable "vm_name" {
+  type        = string
+  description = "VM Name"
+}
+provider "vsphere" {
+
+  # If you have a self-signed cert
+  allow_unverified_ssl = true
+}
 data "vsphere_datacenter" "dc" {
   name = "Datacenter"
 }
@@ -23,7 +32,7 @@ data "vsphere_resource_pool" "pool" {
 }
 
 resource "vsphere_virtual_machine" "vm" {
-  name             = "terraform-test"
+  name             = var.vm_name
   resource_pool_id = "${data.vsphere_compute_cluster.cluster.resource_pool_id}"
   datastore_id     = "${data.vsphere_datastore.datastore.id}"
   source = "https://cloud-images.ubuntu.com/releases/focal/release/ubuntu-20.04-server-cloudimg-amd64.ova"
