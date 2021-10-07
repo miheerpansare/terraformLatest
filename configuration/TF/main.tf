@@ -10,7 +10,6 @@ provider "vsphere" {
 data "vsphere_datacenter" "dc" {
   name = "Datacenter"
 }
-
 data "vsphere_datastore" "datastore" {
   name          = "Datastore-10.206.241.150"
   datacenter_id = "${data.vsphere_datacenter.dc.id}"
@@ -21,6 +20,11 @@ data "vsphere_network" "network" {
   datacenter_id = "${data.vsphere_datacenter.dc.id}"
 }
 
+data "vsphere_compute_cluster" "cluster" {
+  name          = "Cluster"
+  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+}
+
 data "vsphere_resource_pool" "pool" {
   name          = "Cluster/Resources"
   datacenter_id = data.vsphere_datacenter.dc.id
@@ -28,7 +32,7 @@ data "vsphere_resource_pool" "pool" {
 
 resource "vsphere_virtual_machine" "vm" {
   name             = var.vm_name
-  resource_pool_id = "${data.vsphere_resource_pool.pool.id}"
+  resource_pool_id = "${data.vsphere_compute_cluster.cluster.resource_pool_id}"
   datastore_id     = "${data.vsphere_datastore.datastore.id}"
   source = "https://cloud-images.ubuntu.com/releases/focal/release/ubuntu-20.04-server-cloudimg-amd64.ova"
   num_cpus = 1
