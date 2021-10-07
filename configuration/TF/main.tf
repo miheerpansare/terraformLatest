@@ -1,13 +1,3 @@
-provider "vsphere" {
-  user           = "administrator@vsphere.local"
-  password       = "VMware1!"
-  vsphere_server = "10.206.240.229"
-  cloudZone      = "mpvCenter/Datacenter"
-
-  # If you have a self-signed cert
-  allow_unverified_ssl = true
-}
-
 data "vsphere_datacenter" "dc" {
   name = "Datacenter"
 }
