@@ -37,6 +37,8 @@ resource "vsphere_virtual_machine" "vm" {
   num_cpus = 1
   memory   = 512
   guest_id = "other3xLinux64Guest"
+  wait_for_guest_net_timeout = 0
+  wait_for_guest_ip_timeout  = 0
 
   network_interface {
     network_id = "${data.vsphere_network.network.id}"
