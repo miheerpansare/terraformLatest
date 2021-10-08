@@ -2,6 +2,11 @@ variable "vm_name" {
   type        = string
   description = "VM Name"
 }
+variable "domain" {
+  type        = list(string)
+  description = "Domain"
+  default = ["saxe.ad", "gl.ad"]
+}
 provider "vsphere" {
 
   # If you have a self-signed cert
