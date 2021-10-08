@@ -5,8 +5,12 @@ variable "vm_name" {
 variable "domain" {
   type        = list(string)
   description = "Domain"
-  default = ["saxe.ad", "gl.ad"]
 }
+
+domain = [
+  "gl.ad",
+  "saxe.ad"
+]
 provider "vsphere" {
 
   # If you have a self-signed cert
