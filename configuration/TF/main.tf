@@ -3,14 +3,9 @@ variable "vm_name" {
   description = "VM Name"
 }
 variable "domain" {
-  type        = list(string)
+  type        = string
   description = "Domain"
 }
-
-domain = [
-  "gl.ad",
-  "saxe.ad"
-]
 
 provider "vsphere" {
 
