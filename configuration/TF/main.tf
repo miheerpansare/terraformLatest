@@ -11,6 +11,7 @@ domain = [
   "gl.ad",
   "saxe.ad"
 ]
+
 provider "vsphere" {
 
   # If you have a self-signed cert
