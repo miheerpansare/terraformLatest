@@ -51,14 +51,12 @@ resource "vsphere_virtual_machine" "vm" {
   guest_id = "other3xLinux64Guest"
   wait_for_guest_net_timeout = 0
   wait_for_guest_ip_timeout  = 0	
-  host_system_id = data.vsphere_host.host.id	
+  host_system_id = "${data.vsphere_host.host.id}"	
   network_interface {
     network_id = "${data.vsphere_network.network.id}"
   }
-  ovf_deploy {
     // Url to remote ovf/ova file
     remote_ovf_url = "https://cloud-images.ubuntu.com/releases/focal/release/ubuntu-20.04-server-cloudimg-amd64.ova"
-  }
 
   disk {
     label = "disk0"
