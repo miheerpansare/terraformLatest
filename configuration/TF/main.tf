@@ -56,6 +56,7 @@ resource "vsphere_virtual_machine" "vm" {
     network_id = "${data.vsphere_network.network.id}"
   }
   ovf_deploy {
+    allow_unverified_ssl_cert = true
     // Url to remote ovf/ova file
     remote_ovf_url = "https://cloud-images.ubuntu.com/releases/focal/release/ubuntu-20.04-server-cloudimg-amd64.ova"
   }
