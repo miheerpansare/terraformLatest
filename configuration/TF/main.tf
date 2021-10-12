@@ -25,13 +25,8 @@ data "vsphere_network" "network" {
   datacenter_id = "${data.vsphere_datacenter.dc.id}"
 }
 
-variable "vsphere_host" {
-  type = "string"
-}
-vsphere_host = "10.206.241.150"
-
 data "vsphere_host" "host" {
-  name = var.vsphere_host
+  name = "10.206.241.150"
   datacenter_id = data.vsphere_datacenter.dc.id
 }
 
