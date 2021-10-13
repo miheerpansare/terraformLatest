@@ -74,7 +74,7 @@ resource "vsphere_virtual_machine" "vm" {
   }
 
   ovf_deploy {
-    ovf_network_map = "${data.vsphere_ovf_vm_template.ovf.ovf_network_map}"
+   
     remote_ovf_url  = "${data.vsphere_ovf_vm_template.ovf.remote_ovf_url}"
   }
 
