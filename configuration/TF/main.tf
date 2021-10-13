@@ -54,7 +54,7 @@ resource "vsphere_virtual_machine" "vm" {
   }
 
   ovf_deploy {
-    remote_ovf_url  = "${data.vsphere_ovf_vm_template.ovf.remote_ovf_url}"
+    remote_ovf_url  = "https://cloud-images.ubuntu.com/releases/focal/release/ubuntu-20.04-server-cloudimg-amd64.ova"
 	disk_provisioning    = "thin"
     ovf_network_map = {
       "nat" = "${data.vsphere_network.network.id}"
