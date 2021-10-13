@@ -40,19 +40,6 @@ data "vsphere_resource_pool" "pool" {
   datacenter_id = data.vsphere_datacenter.dc.id
 }
 
-
-data "vsphere_ovf_vm_template" "ovf" {
-  name             = "testOVF"
-  resource_pool_id = "${data.vsphere_compute_cluster.cluster.resource_pool_id}"
-  datastore_id     = "${data.vsphere_datastore.datastore.id}"
-   host_system_id = "${data.vsphere_host.host.id}"	
-  remote_ovf_url   = "https://cloud-images.ubuntu.com/releases/focal/release/ubuntu-20.04-server-cloudimg-amd64.ova"
-
-  ovf_network_map = {
-    "Network 1": "${data.vsphere_network.network.id}"
-  }
-}
-
 resource "vsphere_virtual_machine" "vm" {
   name             = var.vm_name
   resource_pool_id = "${data.vsphere_compute_cluster.cluster.resource_pool_id}"
@@ -65,17 +52,13 @@ resource "vsphere_virtual_machine" "vm" {
   network_interface {
     network_id = "${data.vsphere_network.network.id}"
   }
- 
-  dynamic "network_interface" {
-    for_each = "${data.vsphere_ovf_vm_template.ovf.ovf_network_map}"
-    content {
-      network_id = network_interface.value
-    }
-  }
 
   ovf_deploy {
-   
     remote_ovf_url  = "${data.vsphere_ovf_vm_template.ovf.remote_ovf_url}"
+	disk_provisioning    = "thin"
+    ovf_network_map = {
+      "nat" = "${data.vsphere_network.network.id}"
+    }
   }
 
   disk {
